@@ -2,16 +2,16 @@ const utils = require('@percy/sdk-utils');
 
 // Collect client and environment information
 const sdkPkg = require('./package.json');
-const puppeteerPkg = require('puppeteer/package.json');
+const playwrightPkg = require('playwright-core/package.json');
 const CLIENT_INFO = `${sdkPkg.name}/${sdkPkg.version}`;
-const ENV_INFO = `${puppeteerPkg.name}/${puppeteerPkg.version}`;
+const ENV_INFO = `${playwrightPkg.name}/${playwrightPkg.version}`;
 
 // Take a DOM snapshot and post it to the snapshot endpoint
 async function percySnapshot(page, name, options) {
-  if (!page) throw new Error('A Puppeteer `page` object is required.');
+  if (!page) throw new Error('A Playwright `page` object is required.');
   if (!name) throw new Error('The `name` argument is required.');
   if (!(await utils.isPercyEnabled())) return;
-  let log = utils.logger('puppeteer');
+  let log = utils.logger('playwright');
 
   try {
     // Inject the DOM serialization script

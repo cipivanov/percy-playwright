@@ -1,8 +1,10 @@
-import { expectType, expectError } from 'tsd';
-import * as Puppeteer from 'puppeteer';
+// @ts-nocheck
+
+import { expectError, expectType } from 'tsd';
+import { Page } from 'playwright-core';
 import percySnapshot from '.';
 
-declare const page: Puppeteer.Page;
+declare const page: Page;
 
 expectError(percySnapshot());
 expectError(percySnapshot(page));

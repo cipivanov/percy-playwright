@@ -1,28 +1,30 @@
-# @percy/puppeteer
-[![Version](https://img.shields.io/npm/v/@percy/puppeteer.svg)](https://npmjs.org/package/@percy/puppeteer)
-![Test](https://github.com/percy/percy-puppeteer/workflows/Test/badge.svg)
+# :warning: THIS REPO IS A FORK OF [percy/percy-puppeteer](https://github.com/percy/percy-puppeteer/) :warning:
 
-[Percy](https://percy.io) visual testing for Google Puppeteer.
+# @peloton/percy-playwright
+[![Version](https://img.shields.io/npm/v/@peloton/percy-playwright.svg)](https://npmjs.org/package/@peloton/percy-playwright)
+![Test](https://github.com/pelotoncycle/percy-playwright/workflows/Test/badge.svg)
+
+[Percy](https://percy.io) visual testing for Microsoft Playwright.
 
 ## Installation
 
 ```sh-session
-$ npm install --save-dev @percy/cli @percy/puppeteer
+$ npm install --save-dev @percy/cli @peloton/percy-playwright
 ```
 
 ## Usage
 
-This is an example using the `percySnapshot` function. For other examples of `puppeteer`
-usage, see the [Puppeteer docs](https://pptr.dev).
+This is an example using the `percySnapshot` function. For other examples of `playwright`
+usage, see the [Playwright docs](https://playwright.dev/).
 
 ```javascript
-const puppeteer = require('puppeteer');
-const percySnapshot = require('@percy/puppeteer');
+const playwright = require('playwright-core');
+const percySnapshot = require('@peloton/percy-playwright');
 
 (async () => {
-  const browser = await puppeteer.launch();
+  const browser = await playwright.chromium.launch();
   const page = await browser.newPage();
-  await page.goto('http://example.com/', { waitUntil: 'networkidle2' });
+  await page.goto('http://example.com/', { waitUntil: 'networkidle' });
   await percySnapshot(page, 'Example Site');
 
   await browser.close();
@@ -56,7 +58,7 @@ $ percy exec -- node script.js
 
 `percySnapshot(page, name[, options])`
 
-- `page` (**required**) - A `puppeteer` page instance
+- `page` (**required**) - A `Playwright` page instance
 - `name` (**required**) - The snapshot name; must be unique to each snapshot
 - `options` - [See per-snapshot configuration options](https://docs.percy.io/docs/cli-configuration#per-snapshot-configuration)
 

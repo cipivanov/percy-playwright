@@ -1,8 +1,8 @@
-import * as Puppeteer from 'puppeteer';
+import { Page } from 'playwright-core';
 import { SnapshotOptions } from '@percy/core';
 
 export default function percySnapshot(
-  page: Puppeteer.Page,
-  name: string,
-  options?: SnapshotOptions
+    page: Page,
+    name: string,
+    options?: SnapshotOptions
 ): Promise<void>;

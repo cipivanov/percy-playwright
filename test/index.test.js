@@ -1,5 +1,5 @@
 const expect = require('expect');
-const puppeteer = require('puppeteer');
+const playwright = require('playwright-core');
 const helpers = require('@percy/sdk-utils/test/helpers');
 const percySnapshot = require('..');
 
@@ -8,7 +8,7 @@ describe('percySnapshot', () => {
 
   before(async function() {
     this.timeout(0);
-    browser = await puppeteer.launch();
+    browser = await playwright.chromium.launch();
     await helpers.mockSite();
   });
 
@@ -32,7 +32,7 @@ describe('percySnapshot', () => {
 
   it('throws an error when a page is not provided', async () => {
     await expect(percySnapshot())
-      .rejects.toThrow('A Puppeteer `page` object is required.');
+      .rejects.toThrow('A Playwright `page` object is required.');
   });
 
   it('throws an error when a name is not provided', async () => {
@@ -67,8 +67,8 @@ describe('percySnapshot', () => {
         name: 'Snapshot 1',
         url: 'http://localhost:8000/',
         domSnapshot: '<html><head></head><body>Snapshot Me</body></html>',
-        clientInfo: expect.stringMatching(/@percy\/puppeteer\/.+/),
-        environmentInfo: expect.stringMatching(/puppeteer\/.+/)
+        clientInfo: expect.stringMatching(/@peloton\/percy-playwright\/.+/),
+        environmentInfo: expect.stringMatching(/playwright-core\/.+/)
       }],
       ['/percy/snapshot', expect.objectContaining({
         name: 'Snapshot 2'
